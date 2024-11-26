@@ -1,15 +1,16 @@
 import React, { ReactNode } from 'react';
+import './globals.css';
 
 interface Props {
   children: ReactNode;
 }
 
-const layout = ({ children }: Props) => {
+const RootLayout = ({ children }: Props) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-[#FDFDFD]">{children}</body>
     </html>
   );
 };
 
-export default layout;
+export default RootLayout;

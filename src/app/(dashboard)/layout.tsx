@@ -20,7 +20,9 @@ const DashboardLayout = ({ children }: Props) => {
           className="flex items-center justify-center gap-2 lg:justify-start"
         >
           <Image src={Logo} alt="logo" width={32} height={32} />
-          <span className="hidden lg:block">KLE</span>
+          <span className="hidden text-lg font-bold text-zinc-800 lg:block">
+            KLE IT
+          </span>
         </Link>
         <Menu />
       </div>

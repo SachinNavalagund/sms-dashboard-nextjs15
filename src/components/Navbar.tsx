@@ -43,7 +43,7 @@ const Navbar = () => {
             height={20}
             className="object-contain"
           />
-          <div className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-purple-600 text-xs text-white"></div>
+          <div className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-purple-500 text-xs text-white"/>
         </div>
 
         <div className="flex flex-col">

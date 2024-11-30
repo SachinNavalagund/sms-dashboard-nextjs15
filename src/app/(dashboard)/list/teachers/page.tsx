@@ -4,6 +4,43 @@ import FilterImage from '../../../../../public/filter.png';
 import SortImage from '../../../../../public/sort.png';
 import PlusImage from '../../../../../public/plus.png';
 import Pagination from '@/components/Pagination';
+import Table from '@/components/Table';
+
+const columns = [
+  {
+    header: 'Info',
+    accessor: 'info',
+  },
+  {
+    header: 'Teacher ID',
+    accessor: 'teacherId',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Subjects',
+    accessor: 'subjects',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Classes',
+    accessor: 'classes',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Phone',
+    accessor: 'phone',
+    className: 'hidden lg:table-cell',
+  },
+  {
+    header: 'Address',
+    accessor: 'address',
+    className: 'hidden lg:table-cell',
+  },
+  {
+    header: 'Actions',
+    accessor: 'action',
+  },
+];
 
 const TeachersListPage = () => {
   return (
@@ -32,6 +69,7 @@ const TeachersListPage = () => {
       </div>
 
       {/* List */}
+      <Table columns={columns} />
 
       {/* Pagination */}
       <Pagination />

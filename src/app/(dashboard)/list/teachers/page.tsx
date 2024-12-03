@@ -5,6 +5,21 @@ import SortImage from '../../../../../public/sort.png';
 import PlusImage from '../../../../../public/plus.png';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
+import Link from 'next/link';
+import { role, teachersData } from '@/lib/data';
+import { LuEye, LuTrash } from 'react-icons/lu';
+
+type Teacher = {
+  id: number;
+  teacherId: string;
+  name: string;
+  email?: string;
+  photo: string;
+  phone: string;
+  subjects: string[];
+  classes: string[];
+  address: string;
+};
 
 const columns = [
   {
@@ -43,6 +58,47 @@ const columns = [
 ];
 
 const TeachersListPage = () => {
+  const renderRow = (item: Teacher) => (
+    <tr
+      key={item.id}
+      className="border-b border-gray-200 text-sm even:bg-slate-100 hover:bg-[#e7f9ff]"
+    >
+      <td className="flex items-center gap-4 p-4">
+        <Image
+          src={item.photo}
+          alt=""
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full object-cover md:hidden xl:block"
+        />
+        <div className="flex flex-col">
+          <h3 className="font-semibold">{item.name}</h3>
+          <p className="text-sm text-gray-500">{item?.email}</p>
+        </div>
+      </td>
+      <td className="hidden md:table-cell">{item.teacherId}</td>
+      <td className="hidden md:table-cell">{item.subjects.join(',')}</td>
+      <td className="hidden md:table-cell">{item.classes.join(',')}</td>
+      <td className="hidden md:table-cell">{item.phone}</td>
+      <td className="hidden md:table-cell">{item.address}</td>
+      <td className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
+          <Link href={`/list/teachers/${item.id}`}>
+            <button className="flex h-7 w-7 items-center justify-center rounded-full bg-skyL">
+              <LuEye size={16} className="text-gray-700" />
+            </button>
+          </Link>
+
+          {role === 'admin' && (
+            <button className="flex h-7 w-7 items-center justify-center rounded-full bg-pinkL">
+              <LuTrash size={16} className="text-gray-700" />
+            </button>
+          )}
+        </div>
+      </td>
+    </tr>
+  );
+
   return (
     <div className="m-4 mt-0 flex-1 rounded-md bg-white p-4">
       {/* Top */}
@@ -61,15 +117,17 @@ const TeachersListPage = () => {
               <Image src={SortImage} alt="" width={14} height={14} />
             </button>
 
-            <button className="flex h-8 w-8 items-center justify-center rounded-full bg-skyL">
-              <Image src={PlusImage} alt="" width={14} height={14} />
-            </button>
+            {role === 'admin' && (
+              <button className="flex h-8 w-8 items-center justify-center rounded-full bg-skyL">
+                <Image src={PlusImage} alt="" width={14} height={14} />
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       {/* List */}
-      <Table columns={columns} />
+      <Table columns={columns} renderRow={renderRow} data={teachersData} />
 
       {/* Pagination */}
       <Pagination />

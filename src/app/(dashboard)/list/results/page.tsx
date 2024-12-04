@@ -6,40 +6,74 @@ import PlusImage from '../../../../../public/plus.png';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import Link from 'next/link';
-import { role, subjectsData } from '@/lib/data';
-import { LuEye, LuTrash } from 'react-icons/lu';
+import { resultsData, role } from '@/lib/data';
+import { LuTrash } from 'react-icons/lu';
 import { GoPencil } from 'react-icons/go';
 
-type Subject = {
+type Result = {
   id: number;
-  name: string;
-  teachers?: string[];
+  subject: string;
+  class: string;
+  teacher: string;
+  student: string;
+  date: string;
+  type: 'exam' | 'assignment';
+  score: number;
 };
 
 const columns = [
   {
-    header: 'Subject Name',
-    accessor: 'name',
+    header: 'Subject',
+    accessor: 'subject',
   },
   {
-    header: 'Teachers',
-    accessor: 'teachers',
+    header: 'Student',
+    accessor: 'student',
+  },
+  {
+    header: 'Score',
+    accessor: 'score',
     className: 'hidden md:table-cell',
   },
+  {
+    header: 'Teacher',
+    accessor: 'teacher',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Class',
+    accessor: 'class',
+    className: 'hidden md:table-cell',
+  },
+  {
+    header: 'Date',
+    accessor: 'date',
+    className: 'hidden md:table-cell',
+  },
+  //   {
+  //     header: 'Type',
+  //     accessor: 'type',
+  //     className: 'hidden md:table-cell',
+  //   },
   {
     header: 'Actions',
     accessor: 'action',
   },
 ];
 
-const SubjectListPage = () => {
-  const renderRow = (item: Subject) => (
+const ResultListPage = () => {
+  const renderRow = (item: Result) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 text-sm even:bg-slate-100 hover:bg-[#e7f9ff]"
     >
-      <td className="flex items-center gap-4 p-4">{item.name}</td>
-      <td className="hidden md:table-cell">{item.teachers?.join(',')}</td>
+      <td className="flex items-center gap-4 p-4">{item.subject}</td>
+      <td className="">{item.student}</td>
+      <td className="hidden md:table-cell">{item.score}</td>
+      <td className="hidden md:table-cell">{item.teacher}</td>
+      <td className="hidden md:table-cell">{item.class}</td>
+      <td className="hidden md:table-cell">{item.date}</td>
+      {/* <td className="hidden md:table-cell">{item.type}</td> */}
 
       <td className="flex items-center gap-2">
         <div className="flex items-center gap-2">
@@ -63,7 +97,7 @@ const SubjectListPage = () => {
     <div className="m-4 mt-0 flex-1 rounded-md bg-white p-4">
       {/* Top */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden text-lg font-semibold md:block">All Subjects</h1>
+        <h1 className="hidden text-lg font-semibold md:block">All Results</h1>
 
         <div className="flex w-full flex-col items-center gap-4 md:w-auto md:flex-row">
           <TableSearch />
@@ -87,7 +121,7 @@ const SubjectListPage = () => {
       </div>
 
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={subjectsData} />
+      <Table columns={columns} renderRow={renderRow} data={resultsData} />
 
       {/* Pagination */}
       <Pagination />
@@ -95,4 +129,4 @@ const SubjectListPage = () => {
   );
 };
 
-export default SubjectListPage;
+export default ResultListPage;

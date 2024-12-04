@@ -6,24 +6,29 @@ import PlusImage from '../../../../../public/plus.png';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import Link from 'next/link';
-import { role, subjectsData } from '@/lib/data';
+import { lessonsData, role } from '@/lib/data';
 import { LuEye, LuTrash } from 'react-icons/lu';
 import { GoPencil } from 'react-icons/go';
 
-type Subject = {
+type Lesson = {
   id: number;
-  name: string;
-  teachers?: string[];
+  subject: string;
+  class: string;
+  teacher: string;
 };
 
 const columns = [
   {
-    header: 'Subject Name',
-    accessor: 'name',
+    header: 'Subject',
+    accessor: 'subject',
   },
   {
-    header: 'Teachers',
-    accessor: 'teachers',
+    header: 'Class',
+    accessor: 'class',
+  },
+  {
+    header: 'Teacher',
+    accessor: 'teacher',
     className: 'hidden md:table-cell',
   },
   {
@@ -32,14 +37,15 @@ const columns = [
   },
 ];
 
-const SubjectListPage = () => {
-  const renderRow = (item: Subject) => (
+const LessonsListPage = () => {
+  const renderRow = (item: Lesson) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 text-sm even:bg-slate-100 hover:bg-[#e7f9ff]"
     >
-      <td className="flex items-center gap-4 p-4">{item.name}</td>
-      <td className="hidden md:table-cell">{item.teachers?.join(',')}</td>
+      <td className="flex items-center gap-4 p-4">{item.subject}</td>
+      <td className="">{item.class}</td>
+      <td className="hidden md:table-cell">{item.teacher}</td>
 
       <td className="flex items-center gap-2">
         <div className="flex items-center gap-2">
@@ -63,7 +69,7 @@ const SubjectListPage = () => {
     <div className="m-4 mt-0 flex-1 rounded-md bg-white p-4">
       {/* Top */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden text-lg font-semibold md:block">All Subjects</h1>
+        <h1 className="hidden text-lg font-semibold md:block">All Lessons</h1>
 
         <div className="flex w-full flex-col items-center gap-4 md:w-auto md:flex-row">
           <TableSearch />
@@ -87,7 +93,7 @@ const SubjectListPage = () => {
       </div>
 
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={subjectsData} />
+      <Table columns={columns} renderRow={renderRow} data={lessonsData} />
 
       {/* Pagination */}
       <Pagination />
@@ -95,4 +101,4 @@ const SubjectListPage = () => {
   );
 };
 
-export default SubjectListPage;
+export default LessonsListPage;

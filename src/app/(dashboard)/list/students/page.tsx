@@ -1,3 +1,5 @@
+'use client';
+
 import TableSearch from '@/components/TableSearch';
 import Image from 'next/image';
 import FilterImage from '../../../../../public/filter.png';
@@ -77,7 +79,7 @@ const StudentListPage = () => {
       <td className="hidden md:table-cell">{item.address}</td>
       <td className="flex items-center gap-2">
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          <Link href={`/list/students/${item.id}`}>
             <button className="flex h-7 w-7 items-center justify-center rounded-full bg-skyL">
               <LuEye size={16} className="text-gray-700" />
             </button>
